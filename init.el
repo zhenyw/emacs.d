@@ -27,7 +27,7 @@
 (package-initialize)
 
 	    
-;; gtags
+;; cc-mode & gtags
 (autoload 'gtags-mode "gtags" "" t)
 (setq gtags-suggested-key-mapping t)
 
@@ -35,6 +35,11 @@
     '(lambda ()
        (gtags-mode 1)
 ))
+
+;; default to 'linux'
+(setq c-default-style '((java-mode . "java")
+			(awk-mode . "awk")
+			(other . "linux")))
 
 ;; title
 (setq frame-title-format
