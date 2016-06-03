@@ -41,6 +41,15 @@
 			(awk-mode . "awk")
 			(other . "linux")))
 
+;; customize c++
+(c-add-style "my-c++-style"
+	     '("stroupstrup"
+	       (indent-tabs-mode . nil)
+	       ))
+(defun my-c++-mode-hook ()
+  (c-set-style "my-c++-style"))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
 ;; title
 (setq frame-title-format
   '((:eval (if (buffer-file-name)
