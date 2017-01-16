@@ -1,11 +1,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-(autoload 'markdown-mode "markdown-mode.el"
-  "Major mode for editing markdown files" t)
-(setq auto-mode-alist
-      (cons '("\\.md" . markdown-mode) auto-mode-alist))
-
 ;; be quiet, bady
 (blink-cursor-mode 0)
 ;;(scroll-bar-mode 0)
@@ -14,19 +9,24 @@
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
 ;;(setq visible-bell t)
-
-(set-fill-column 70)
+(setq default-fill-column 80)
 
 ;; package (ELPA/MELPA)
 (require 'package)
-(add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
-
+(setq package-enable-at-startup nil)
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages")
+	("marmalade" . "http://marmalade-repo.org/packages")
+	("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
-	    
+;; 'use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+
+
 ;; cc-mode & gtags
 (autoload 'gtags-mode "gtags" "" t)
 (setq gtags-suggested-key-mapping t)
@@ -88,6 +88,12 @@
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+
+;; markdown
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing markdown files" t)
+(setq auto-mode-alist
+      (cons '("\\.md" . markdown-mode) auto-mode-alist))
 
 ;; helper function
 (defun show-file-absolute-name ()
