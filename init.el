@@ -37,8 +37,7 @@
   ;;     M-N, M-P: next/prev definition
   ;;     M-l j: jump to definition
   ;;     C-g: close peek window
-  :bind ("M-]" . citre-peek)
-)
+  :bind (:map citre-mode-map ("M-]" . citre-peek)))
 
 ;; custom...(just ignore for now...)
 (custom-set-variables
