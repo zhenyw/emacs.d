@@ -29,7 +29,16 @@
 (use-package citre
   :init
   ;; below load citre default config
-  (require 'citre-config))
+  (require 'citre-config)
+  ;; 'citre-jump & 'citre-jump-back has default M-. & M-, key binding
+  ;; the only missed one should be peek.
+  ;; Peek key bindings is:
+  ;;     M-n, M-p: next/prev line
+  ;;     M-N, M-P: next/prev definition
+  ;;     M-l j: jump to definition
+  ;;     C-g: close peek window
+  :bind ("M-]" . citre-peek)
+)
 
 ;; custom...(just ignore for now...)
 (custom-set-variables
