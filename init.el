@@ -31,13 +31,20 @@
   ;; below load citre default config
   (require 'citre-config)
   ;; 'citre-jump & 'citre-jump-back has default M-. & M-, key binding
-  ;; the only missed one should be peek.
-  ;; Peek key bindings is:
+  ;; (M-? for reverse reference lookup), the only missed one should be peek.
+  ;; Peek window key bindings is:
   ;;     M-n, M-p: next/prev line
   ;;     M-N, M-P: next/prev definition
   ;;     M-l j: jump to definition
   ;;     C-g: close peek window
   :bind (:map citre-mode-map ("M-]" . citre-peek)))
+
+(use-package cc-mode
+  :config
+  (setq c-default-style '((java-mode . "java")
+                          (awk-mode . "awk")
+                          (other . "linux"))))
+
 
 ;; custom...(just ignore for now...)
 (custom-set-variables
