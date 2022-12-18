@@ -54,6 +54,8 @@
 	      ("C-c n" . multi-vterm-next)
 	      ("C-c p" . multi-vterm-prev)))
 
+(use-package rust-mode)
+
 ;; custom...(just ignore for now...)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
