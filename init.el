@@ -45,6 +45,7 @@
                           (awk-mode . "awk")
                           (other . "linux"))))
 
+(use-package vterm)
 
 ;; custom...(just ignore for now...)
 (custom-set-variables
