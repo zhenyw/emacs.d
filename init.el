@@ -47,6 +47,13 @@
 
 (use-package vterm)
 
+(use-package multi-vterm
+  :bind (:map vterm-mode-map
+	      ;; How to specify vterm's default mode special key
+	      ;; instead of directly specify C-c?
+	      ("C-c n" . multi-vterm-next)
+	      ("C-c p" . multi-vterm-prev)))
+
 ;; custom...(just ignore for now...)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
