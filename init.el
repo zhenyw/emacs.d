@@ -56,6 +56,19 @@
 
 (use-package rust-mode)
 
+(use-package lsp-mode
+  :init
+  :hook (;;lsp-rust: need to install rust-analyzer like
+	 ;;    rustup component add rust-src
+	 ;;    rustup component add rust-analyzer
+	 ;;Need to add 'rust-analyzer' into PATH e.g
+	 ;;    ln -sf `rustup which rust-analyzer` ~/bin/.
+	 ;;lsp-rust would by default search 'rust-analyzer' binary
+	 ;;Note: maybe there's some cargo metadata error, looks if
+	 ;;tried to build project one, it might better to go...
+	 (rust-mode . lsp))
+  :commands lsp)
+
 ;; custom...(just ignore for now...)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
