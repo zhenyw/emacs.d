@@ -1,8 +1,9 @@
 ;; global setting
 (blink-cursor-mode 0)
 (menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
+(when (display-graphic-p nil)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0))
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
 (setq default-fill-column 80)
@@ -12,6 +13,7 @@
 (require 'package)
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
+	("melpa-stable" . "https://stable.melpa.org/packages/")
 	("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 
