@@ -1,3 +1,7 @@
+;; This is main personal config settings, supposed to be loaded from init.el
+;; as init.el might be added some custom setting, which I don't want to pollute
+;; other default config.
+
 ;; global setting
 (blink-cursor-mode 0)
 (menu-bar-mode 0)
@@ -70,4 +74,3 @@
 	 ;;tried to build project one, it might better to go...
 	 (rust-mode . lsp))
   :commands lsp)
-  
