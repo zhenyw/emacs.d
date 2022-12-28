@@ -11,6 +11,7 @@
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
 (setq default-fill-column 80)
+(setq column-number-mode t)
 (set-frame-font "Hack-14" nil t)
 
 ;; package (ELPA/MELPA)
