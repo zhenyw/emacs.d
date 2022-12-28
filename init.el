@@ -8,3 +8,6 @@
 ;;         ("https" . "proxy:port")))
 
 (load-file "~/.emacs.d/sync/config.el")
+
+;; load under testing config?
+;; (load-file "~/.emacs.d/sync/testing.el")
