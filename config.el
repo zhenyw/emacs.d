@@ -76,3 +76,19 @@
 	 ;;tried to build project one, it might better to go...
 	 (rust-mode . lsp))
   :commands lsp)
+
+;; open url in firefox
+;; =>
+(setq browse-url-browser-function 'browse-url-firefox
+      browse-url-new-window-flag t
+      browse-url-firefox-new-window-is-tab t)
+(when (eq system-type 'windows-nt)
+  (setq browse-url-firefox-program "C:/Program Files/Mozilla Firefox/firefox.exe"))
+
+;; vertical select
+(use-package vertico
+  :init
+  (vertico-mode))
+
+;; org-mode
+(setq org-log-done 'time)
