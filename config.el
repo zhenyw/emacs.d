@@ -23,11 +23,19 @@
   )
 
 ;; package (ELPA/MELPA)
+;; so MELPA is for git master tip; MELPA-stable is for tagged release
+;; which might not be needed as it looks package maintainer doesn't necessarily
+;; keep tagged version compatible...
+;;
+;;	("melpa-stable" . "https://stable.melpa.org/packages/")
+;; note:
+;; * 'vertico' requires gnu elpa
 (require 'package)
 (setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-	("melpa-stable" . "https://stable.melpa.org/packages/")
-	("gnu" . "https://elpa.gnu.org/packages/")))
+      '(
+	("gnu" . "https://elpa.gnu.org/packages/")
+	("melpa" . "https://melpa.org/packages/")
+	))
 (package-initialize)
 
 ;; use-package
