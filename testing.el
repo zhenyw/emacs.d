@@ -19,3 +19,10 @@
 ;;  :init (doom-modeline-mode 1))
 
 ;;(global-display-line-numbers-mode)
+
+;; vertico: vertical select
+;; Note: seems vertico has issue when using finding reference (M-?)
+;; in citre/tags, not sure why...so disable first
+;;(use-package vertico
+;;  :init
+;;  (vertico-mode))

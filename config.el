@@ -102,10 +102,5 @@
 (when (eq system-type 'windows-nt)
   (setq browse-url-firefox-program "C:/Program Files/Mozilla Firefox/firefox.exe"))
 
-;; vertical select
-(use-package vertico
-  :init
-  (vertico-mode))
-
 ;; org-mode
 (setq org-log-done 'time)
