@@ -4,6 +4,7 @@
 
 ;; global setting
 (blink-cursor-mode 0)
+(setq visible-cursor nil)
 (menu-bar-mode 0)
 (when (display-graphic-p nil)
   (tool-bar-mode 0)
