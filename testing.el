@@ -1,7 +1,9 @@
 ;; Just put everything under testing here. After some experiments,
 ;; if something feels good to use, can move into default config.el
 
-(use-package magit)
+;; Note: looks this slows down some file open contained in git?
+;; not sure why yet...
+;;(use-package magit)
 
 ;;(use-package helm
 ;;  :bind (("M-x" . helm-M-x)
