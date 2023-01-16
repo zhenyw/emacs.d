@@ -17,8 +17,8 @@
 
 ;; Note: looks only short version of absolute name might be useful,
 ;; but still not that much...
-;;(use-package doom-modeline
-;;  :init (doom-modeline-mode 1))
+(use-package doom-modeline
+  :init (doom-modeline-mode 1))
 
 ;;(global-display-line-numbers-mode)
 
