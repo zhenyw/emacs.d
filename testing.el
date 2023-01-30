@@ -28,3 +28,15 @@
 ;;(use-package vertico
 ;;  :init
 ;;  (vertico-mode))
+
+;; only enable vterm on linux
+;;(when (eq system-type 'gnu/linux)
+;;  (use-package vterm)
+
+;;  (use-package multi-vterm
+;;    :bind (:map vterm-mode-map
+		;; How to specify vterm's default mode special key
+		;; instead of directly specify C-c?
+;;		("C-c n" . multi-vterm-next)
+;;		("C-c p" . multi-vterm-prev))))
+
