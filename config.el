@@ -60,6 +60,7 @@
 
 (use-package lsp-mode
   :init
+  :bind-keymap ("C-c l" . lsp-command-map)
   :hook (;;lsp-rust: need to install rust-analyzer like
 	 ;;    rustup component add rust-src
 	 ;;    rustup component add rust-analyzer
@@ -83,6 +84,16 @@
 	  c-or-c++-mode
 	  ) . lsp-deferred)
   :commands lsp)
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :bind
+  (("M-]" . lsp-ui-peek-find-definitions)
+   )
+  :custom
+  ((lsp-ui-peek-always-show t)
+   )
+  )
 
 ;; open url in firefox
 ;; =>
