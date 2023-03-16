@@ -58,6 +58,8 @@
 
 (use-package rust-mode)
 
+(use-package which-key)
+
 (use-package lsp-mode
   :init
   :bind-keymap ("C-c l" . lsp-command-map)
@@ -83,7 +85,9 @@
 	  c++-mode
 	  c-or-c++-mode
 	  ) . lsp-deferred)
-  :commands lsp)
+  :commands lsp
+  :config
+  (lsp-enable-which-key-integration t))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
@@ -91,7 +95,14 @@
   (("M-]" . lsp-ui-peek-find-definitions)
    )
   :custom
-  ((lsp-ui-peek-always-show t)
+  ;; peek keybind
+  ;; n/p: next/prev
+  ;; M-n/p: 
+  ;; enter: open file
+  ;; M-enter: open file in new window
+  ;; q: quit
+  ((lsp-ui-peek-enable t)
+   (lsp-ui-peek-always-show t)
    )
   )
 
