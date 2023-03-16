@@ -90,6 +90,9 @@
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-ui
+  :custom-face
+  ;; make peek window same color as default peek list window
+  (lsp-ui-peek-peek ((t (:background "#181818"))))
   :hook (lsp-mode . lsp-ui-mode)
   :bind
   (("M-]" . lsp-ui-peek-find-definitions)
@@ -116,3 +119,12 @@
 
 ;; org-mode
 (setq org-log-done 'time)
+
+;; recentf
+(use-package recentf
+  :config
+  (progn
+    (setq recentf-max-saved-items 200
+          recentf-max-menu-items 15)
+    (recentf-mode)
+    ))
