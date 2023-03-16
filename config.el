@@ -50,19 +50,6 @@
   :config
   (load-theme 'zenburn t))
 
-(use-package citre
-  :init
-  ;; below load citre default config
-  (require 'citre-config)
-  ;; 'citre-jump & 'citre-jump-back has default M-. & M-, key binding
-  ;; (M-? for reverse reference lookup), the only missed one should be peek.
-  ;; Peek window key bindings is:
-  ;;     M-n, M-p: next/prev line
-  ;;     M-N, M-P: next/prev definition
-  ;;     M-l j: jump to definition
-  ;;     C-g: close peek window
-  :bind (:map citre-mode-map ("M-]" . citre-peek)))
-
 (use-package cc-mode
   :config
   (setq c-default-style '((java-mode . "java")
@@ -81,7 +68,20 @@
 	 ;;lsp-rust would by default search 'rust-analyzer' binary
 	 ;;Note: maybe there's some cargo metadata error, looks if
 	 ;;tried to build project one, it might better to go...
-	 (rust-mode . lsp))
+	 (rust-mode
+	  ;;enable for all c/c++ mode (not sure why cc-mode not work...)
+	  ;;for linux kernel, just use 'clangd' lsp server
+	  ;;   make CC=clang defconfig (for e.g)
+	  ;;   make CC=clang
+	  ;;   ./scripts/clang-tools/gen_compile_commands.py
+	  ;;then just import project from top of linux kernel source
+	  ;;default xref key seems still works:
+	  ;;   alt+.: find definition
+	  ;;   S-alt-?: find reference
+	  c-mode
+	  c++-mode
+	  c-or-c++-mode
+	  ) . lsp-deferred)
   :commands lsp)
 
 ;; open url in firefox

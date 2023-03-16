@@ -40,3 +40,17 @@
 ;;		("C-c n" . multi-vterm-next)
 ;;		("C-c p" . multi-vterm-prev))))
 
+;; citre is good, mostly for the peek window, but limited by ctags or global,
+;; sometimes it just can't get full tracks, so switch to lsp
+;;(use-package citre
+;;  :init
+  ;;;; below load citre default config
+;;  (require 'citre-config)
+  ;; 'citre-jump & 'citre-jump-back has default M-. & M-, key binding
+  ;; (M-? for reverse reference lookup), the only missed one should be peek.
+  ;; Peek window key bindings is:
+  ;;     M-n, M-p: next/prev line
+  ;;     M-N, M-P: next/prev definition
+  ;;     M-l j: jump to definition
+  ;;     C-g: close peek window
+;;  :bind (:map citre-mode-map ("M-]" . citre-peek)))
