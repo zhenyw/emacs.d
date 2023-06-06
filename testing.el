@@ -54,3 +54,5 @@
   ;;     M-l j: jump to definition
   ;;     C-g: close peek window
 ;;  :bind (:map citre-mode-map ("M-]" . citre-peek)))
+
+(use-package deadgrep)
