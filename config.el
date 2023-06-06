@@ -58,7 +58,12 @@
 
 (use-package rust-mode)
 
-(use-package which-key)
+(use-package which-key
+  :config
+  (progn
+    (which-key-mode)
+    )
+  )
 
 (use-package lsp-mode
   :init
@@ -92,7 +97,9 @@
 (use-package lsp-ui
   :custom-face
   ;; make peek window same color as default peek list window
-  (lsp-ui-peek-peek ((t (:background "#181818"))))
+  ;; make color similar to zenburn theme default background
+  (lsp-ui-peek-peek ((t (:background "#383838"))))
+  (lsp-ui-peek-list ((t (:background "#383838"))))
   :hook (lsp-mode . lsp-ui-mode)
   :bind
   (("M-]" . lsp-ui-peek-find-definitions)
@@ -122,6 +129,9 @@
 
 ;; recentf
 (use-package recentf
+  :bind
+  (("C-x C-r" . recentf-open-files)
+   )
   :config
   (progn
     (setq recentf-max-saved-items 200
