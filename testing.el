@@ -18,7 +18,9 @@
 ;; Note: looks only short version of absolute name might be useful,
 ;; but still not that much...
 (use-package doom-modeline
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-icon nil))
 
 ;;(global-display-line-numbers-mode)
 
@@ -56,3 +58,4 @@
 ;;  :bind (:map citre-mode-map ("M-]" . citre-peek)))
 
 (use-package deadgrep)
+
