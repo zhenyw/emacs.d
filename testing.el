@@ -117,4 +117,5 @@
   (setq eglot-report-progress t)
   (add-hook 'rust-mode-hook 'eglot-ensure)
   (add-hook 'c-mode-hook 'eglot-ensure)
+  (add-to-list 'eglot-stay-out-of 'eldoc)
   )
