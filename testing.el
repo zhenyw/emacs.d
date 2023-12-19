@@ -57,7 +57,9 @@
   ;;     C-g: close peek window
 ;;  :bind (:map citre-mode-map ("M-]" . citre-peek)))
 
-(use-package deadgrep)
+(use-package deadgrep
+  :bind ("C-x g" . deadgrep)
+  )
 
 ;;(use-package lsp-mode
 ;;  :init
