@@ -121,3 +121,9 @@
   (add-hook 'c-mode-hook 'eglot-ensure)
   (add-to-list 'eglot-stay-out-of 'eldoc)
   )
+
+;;dirvish
+(use-package dirvish
+  :config
+  (dirvish-override-dired-mode 1)
+  )
