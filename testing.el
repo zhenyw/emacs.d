@@ -127,3 +127,21 @@
   :config
   (dirvish-override-dired-mode 1)
   )
+
+;;tree-sitter
+(use-package treesit-auto
+  :config
+  (global-treesit-auto-mode))
+
+;;symbols-outline
+(use-package symbols-outline
+  :bind
+  (("C-c i" . symbols-outline-show))
+  :config
+  (setq symbols-outline-fetch-fn #'symbols-outline-lsp-fetch)
+  (setq symbols-outline-window-position 'left)
+  (setq symbols-outline-window-width 40)
+  (setq symbols-outline-use-nerd-icon-in-gui nil)
+  (setq symbols-outline-use-nerd-icon-in-tui nil)
+  (symbols-outline-follow-mode)
+  )
