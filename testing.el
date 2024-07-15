@@ -112,6 +112,8 @@
 ;;   )
 ;;  )
 
+;; company
+(use-package company)
 
 ;; eglot
 (use-package eglot
