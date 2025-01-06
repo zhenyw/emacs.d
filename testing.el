@@ -147,3 +147,21 @@
   (setq symbols-outline-use-nerd-icon-in-tui nil)
   (symbols-outline-follow-mode)
   )
+
+;;notmuch
+(use-package notmuch
+  :commands notmuch-hello
+  :bind (("C-c m" . notmuch-hello))
+  )
+
+;;windmove (easier multiple windows point switch & swap)
+(use-package windmove
+  :config
+  (windmove-default-keybindings)
+  :bind
+  (("C-S-<left>" . windmove-swap-states-left)
+   ("C-S-<right>" . windmove-swap-states-right)
+   ("C-S-<up>" . windmove-swap-states-up)
+   ("C-S-<down>" . windmove-swap-states-down)
+   )
+  )
