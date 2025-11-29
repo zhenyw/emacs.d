@@ -150,18 +150,104 @@
 
 ;;notmuch
 (use-package notmuch
-  :commands notmuch-hello
-  :bind (("C-c m" . notmuch-hello))
+  :ensure t
+  :defer t
+  ;;:commands notmuch-hello
+  :bind (("C-c m" . notmuch))
+  :config
+  (setq-default notmuch-search-oldest-first nil) ;; show newest
+
+  ;; Tell Emacs to use msmtp for sending mail
+  (setq message-send-mail-function 'message-send-mail-with-sendmail)
+  (setq sendmail-program "msmtp")
+  ;; Specify the account to use for replies/new mail
+  (setq user-mail-address "zhenyuw.linux@gmail.com")
+  (setq user-full-name "Zhenyu Wang")
+
+  ;; Recommended for better compliance with notmuch/msmtp
+  (setq mail-specify-envelope-from t)
+  (setq message-sendmail-envelope-from 'header)
+  (setq mail-envelope-from 'header)
+
+  (setq notmuch-saved-searches
+   '((:name "inbox" :query "tag:inbox" :key "i" :search-type tree)
+     (:name "unread" :query "tag:unread" :key "u")
+     (:name "flagged" :query "tag:flagged" :key "f")
+     (:name "sent" :query "tag:sent" :key "t")
+     (:name "drafts" :query "tag:draft" :key "d")
+     (:name "all mail" :query "*" :key "a")
+     (:name "intel-gfx" :query "tag:intel-gfx" :key "g" :search-type tree)
+     (:name "kvm" :query "tag:kvm" :key "k" :search-type tree)
+     (:name "lkml" :query "tag:lkml" :key "l" :search-type tree)
+     ))
+  (setq notmuch-fcc-dirs "Sent +sent -unread")
   )
 
 ;;windmove (easier multiple windows point switch & swap)
 (use-package windmove
+  :init
+  (windmove-mode 1)
   :config
   (windmove-default-keybindings)
+  ;;(windmove-swap-states-default-keybindings)
   :bind
   (("C-S-<left>" . windmove-swap-states-left)
    ("C-S-<right>" . windmove-swap-states-right)
    ("C-S-<up>" . windmove-swap-states-up)
    ("C-S-<down>" . windmove-swap-states-down)
    )
+  )
+
+;;window operation history track enable
+(winner-mode 1)
+
+;;session saving
+(desktop-save-mode 1)
+
+;;store backup file in single place
+(setq backup-directory-alist '(("." . "~/.emacs.d/saves")))
+
+;;org journal (testing)
+(setq org-capture-templates
+ '(("j" "Journal entry" plain
+    (file+olp+datetree "~/devel/journal.org")
+    "**** %i%?\n"
+    :time-prompt t
+    :unnarrowed t)))
+
+;; nim-mode
+(use-package nim-mode)
+
+;; zig-mode
+(use-package zig-mode)
+
+;; slime
+(use-package slime
+  :config
+  (setq inferior-lisp-program "/usr/bin/sbcl")
+  ;;(setq slime-contribs '(slime-scratch slime-editing-commands))
+  )
+
+;; cscope
+(use-package xcscope
+  :config
+  (cscope-setup)
+  )
+
+;;inhibit-mouse
+(use-package inhibit-mouse
+  :ensure t
+  :custom
+  ;; Disable highlighting of clickable text such as URLs and hyperlinks when
+  ;; hovered by the mouse pointer.
+  (inhibit-mouse-adjust-mouse-highlight t)
+
+  ;; Disables the use of tooltips (show-help-function) during mouse events.
+  (inhibit-mouse-adjust-show-help-function t)
+
+  :config
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
+    (inhibit-mouse-mode 1)
+    )
   )

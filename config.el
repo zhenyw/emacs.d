@@ -44,6 +44,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+;; always enable by default
 (setq use-package-always-ensure t)
 
 (use-package zenburn-theme
@@ -64,7 +65,6 @@
     (which-key-mode)
     )
   )
-
 
 ;; open url in firefox
 ;; =>
