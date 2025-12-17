@@ -1,0 +1,22 @@
+* blogs                                                              :elfeed:
+** linux                                                              :linux:
+*** http://lwn.net/headlines/newrss
+*** https://planet.freedesktop.org/atom.xml
+** emacs                                                              :emacs:
+*** http://www.reddit.com/r/emacs/.rss
+*** http://planet.emacsen.org/atom.xml
+*** http://pragmaticemacs.com/feed/
+*** http://planet.emacslife.com/atom.xml
+** arts                                                                :arts:
+*** http://www.unitas.me/?feed=rss2
+*** http://www.biosmonthly.com/rss.xml
+*** http://www.openbook.org.tw/rss.xml
+*** https://feedx.pw/rss/shanghaishuping.xml
+** news                                                                :news:
+*** http://www.solidot.org/index.rss
+*** http://sspai.com/feed
+*** http://feeds.feedburner.com/nytcn
+*** https://rss.slashdot.org/Slashdot/slashdotMain
+** cycling                                                          :cycling:
+*** https://suckmycog.com/feed/
+*** https://bluelug.com/blog/feed/

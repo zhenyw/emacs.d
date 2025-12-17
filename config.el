@@ -14,6 +14,8 @@
 (setq default-fill-column 80)
 (setq column-number-mode t)
 (set-frame-font "Hack-14" nil t)
+;;no bell sound
+(setq visible-bell t)
 
 ;; define function to shutdown emacs server instance
 (defun server-shutdown ()
@@ -36,6 +38,7 @@
       '(
 	("gnu" . "https://elpa.gnu.org/packages/")
 	("melpa" . "https://melpa.org/packages/")
+	("nongnu" . "https://elpa.nongnu.org/nongnu/")
 	))
 (package-initialize)
 

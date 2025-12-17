@@ -1,6 +1,8 @@
 ;; Just put everything under testing here. After some experiments,
 ;; if something feels good to use, can move into default config.el
 
+(add-to-list 'load-path "~/.emacs.d/sync/lisp")
+
 ;; Note: looks this slows down some file open contained in git?
 ;; not sure why yet...
 ;;(use-package magit)
@@ -250,4 +252,99 @@
       (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
     (inhibit-mouse-mode 1)
     )
+  )
+
+;; eww web browser
+(use-package eww
+  :config
+  (setq shr-use-colors nil)
+  (setq shr-bullet "• ")
+  (setq shr-folding-mode t)
+  (setq eww-search-prefix "https://duckduckgo.com/html?q=")
+  )
+
+
+;; elfeed rss reader
+
+(use-package elfeed-org
+  :ensure t
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/.emacs.d/sync/elfeed.org")))
+
+(use-package elfeed
+  :ensure t
+  ;;  (setq elfeed-feeds
+  ;;	'("http://nullprogram.com/feed/"
+  ;;          "https://planet.emacslife.com/atom.xml"))
+  :bind (:map elfeed-search-mode-map
+	      ("N" . (lambda () (interactive)
+		       (elfeed-search-set-filter "@6-months-ago +unread +news")))
+	      ("E" . (lambda () (interactive)
+		       (elfeed-search-set-filter "@6-months-ago +unread +emacs")))
+	      ("L" . (lambda () (interactive)
+		       (elfeed-search-set-filter "@6-months-ago +unread +linux")))
+	      ("A" . (lambda () (interactive)
+		       (elfeed-search-set-filter "@6-months-ago +unread +arts")))
+	      ("C" . (lambda () (interactive)
+		       (elfeed-search-set-filter "@6-months-ago +unread +cycling")))
+	      )
+  )
+
+;; AI, AI...more to be debugged...
+(use-package eca)
+
+;;emacs-reader
+;; (use-package reader
+;;   :vc t
+;;   :load-path "/home/zhen/devel/emacs/emacs-reader")
+
+;; more themes
+;; (use-package nordic-night-theme
+;;   :ensure t
+;;   )
+
+(use-package doom-themes
+  :ensure t
+  :custom
+  ;; Global settings (defaults)
+  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; for treemacs users
+  (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  ;; :config
+  ;; (load-theme 'doom-one t)
+
+  ;; ;; Enable flashing mode-line on errors
+  ;; (doom-themes-visual-bell-config)
+  ;; ;; Enable custom neotree theme (nerd-icons must be installed!)
+  ;; (doom-themes-neotree-config)
+  ;; ;; or for treemacs users
+  ;; (doom-themes-treemacs-config)
+  ;; ;; Corrects (and improves) org-mode's native fontification.
+  ;; (doom-themes-org-config)
+  )
+
+;; (use-package ef-themes
+;;   :ensure t
+;;   )
+
+;; not bad in dark
+(use-package cyberpunk-theme
+  :ensure t
+  )
+
+(use-package kanagawa-themes
+  :ensure t
+  )
+
+(use-package leuven-theme
+  :ensure t
+  )
+
+;;
+;;magit
+(use-package magit
+  :ensure t
+  :bind (("C-c g" . magit-status))
   )
