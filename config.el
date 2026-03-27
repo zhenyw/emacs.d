@@ -41,6 +41,8 @@
 	("nongnu" . "https://elpa.nongnu.org/nongnu/")
 	))
 (package-initialize)
+;; The 't' makes it asynchronous
+(package-refresh-contents t)
 
 ;; use-package
 (unless (package-installed-p 'use-package)
@@ -51,8 +53,10 @@
 (setq use-package-always-ensure t)
 
 (use-package zenburn-theme
-  :config
-  (load-theme 'zenburn t))
+  :ensure t
+;;:config
+;;  (load-theme 'zenburn t)
+  )
 
 (use-package cc-mode
   :config

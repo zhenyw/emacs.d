@@ -1,7 +1,7 @@
 ;; Just put everything under testing here. After some experiments,
 ;; if something feels good to use, can move into default config.el
 
-(add-to-list 'load-path "~/.emacs.d/sync/lisp")
+(add-to-list 'load-path "~/.emacs.d/sync/lisp/")
 
 ;; Note: looks this slows down some file open contained in git?
 ;; not sure why yet...
@@ -119,12 +119,35 @@
 
 ;; eglot
 (use-package eglot
+  :ensure t
   :config
   (setq eglot-report-progress t)
   (add-hook 'rust-mode-hook 'eglot-ensure)
-  (add-hook 'c-mode-hook 'eglot-ensure)
+  ;; not by default open for all C, can fallback to dump-jump...
+  ;;  (add-hook 'c-mode-hook 'eglot-ensure)
   (add-to-list 'eglot-stay-out-of 'eldoc)
   )
+
+;; Try dump jump...
+;; (use-package dumb-jump
+;;  :ensure t
+;;  :config
+;;  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+;;  (setq dumb-jump-force-searcher 'rg)
+;;  ;; use completion-read instead of a separate buffer with candidates
+;;  ;;(setq xref-show-definitions-function #'xref-show-definitions-completing-read)
+;;  (with-eval-after-load 'project
+;;    (add-to-list 'project-vc-extra-root-markers ".dumbjump"))
+;;  ;; Remove "Makefile" from the list of things that define a project root
+;;  (setq dumb-jump-project-root-denoters 
+;;        '(".dumbjump" ".git" ".projectile" ".project"))
+;;  )
+
+;; use hacked version for emacs project support
+;;(require dumb-jump) ;; why this doesn't work with load-path?
+(load-file "~/.emacs.d/sync/lisp/dumb-jump.el")
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+(setq dumb-jump-force-searcher 'rg)
 
 ;;dirvish
 (use-package dirvish
@@ -183,6 +206,25 @@
      (:name "lkml" :query "tag:lkml" :key "l" :search-type tree)
      ))
   (setq notmuch-fcc-dirs "Sent +sent -unread")
+  )
+
+(with-eval-after-load 'notmuch
+  ;; below from gemini
+  ;; Change the background of the message headers to stand out
+  (set-face-attribute 'notmuch-message-summary-face nil 
+                      :background "#333333" :foreground "orange")
+
+  ;; Change the color of quoted/cited text (the > lines)
+  (set-face-attribute 'notmuch-wash-cited-text nil 
+                      :foreground "gray60")
+
+  ;; Highlight the matching search terms in the message
+  ;;(set-face-attribute 'notmuch-search-matching-face nil 
+  ;;                    :foreground "orange")
+  
+  ;; Make tags look like small buttons or distinctive labels
+  (set-face-attribute 'notmuch-tag-face nil 
+                      :foreground "cyan" :weight 'bold)
   )
 
 ;;windmove (easier multiple windows point switch & swap)
@@ -265,31 +307,64 @@
 
 
 ;; elfeed rss reader
+;; Currently use elfeed/eww to read and use bookmark to save entry.
+;; C-x r l - list bookmarks
+;; C-x r m - mark entry
+(use-package elfeed
+  :ensure t
+  :custom
+  (elfeed-search-remain-on-entry t)
+  (elfeed-search-title-max-width 80)
+  (elfeed-search-title-min-width 30)
+  (elfeed-search-trailing-width 25)
+  (elfeed-show-truncate-long-urls t)
+  :bind
+  (:map elfeed-search-mode-map
+	("Q" . elfeed-kill-buffer)
+	("N" . (lambda () (interactive)
+		 ;;(elfeed-search-set-filter "@6-months-ago +unread +news")))
+		 (elfeed-search-set-filter "@6-months-ago +news")))
+	("E" . (lambda () (interactive)
+		 (elfeed-search-set-filter "@6-months-ago +emacs")))
+	("L" . (lambda () (interactive)
+		 (elfeed-search-set-filter "@6-months-ago +linux")))
+	("A" . (lambda () (interactive)
+		 (elfeed-search-set-filter "@6-months-ago +arts")))
+	("C" . (lambda () (interactive)
+		 (elfeed-search-set-filter "@6-months-ago +cycling")))
+	("B" . (lambda () (interactive)
+		 (elfeed-search-set-filter "@6-months-ago +books")))
+	)
+  (:map elfeed-show-mode-map
+	("f" . elfeed-show-fetch-full-text)
+	)
+  )
 
 (use-package elfeed-org
+  :after elfeed
   :ensure t
   :config
   (elfeed-org)
   (setq rmh-elfeed-org-files (list "~/.emacs.d/sync/elfeed.org")))
 
-(use-package elfeed
-  :ensure t
-  ;;  (setq elfeed-feeds
-  ;;	'("http://nullprogram.com/feed/"
-  ;;          "https://planet.emacslife.com/atom.xml"))
-  :bind (:map elfeed-search-mode-map
-	      ("N" . (lambda () (interactive)
-		       (elfeed-search-set-filter "@6-months-ago +unread +news")))
-	      ("E" . (lambda () (interactive)
-		       (elfeed-search-set-filter "@6-months-ago +unread +emacs")))
-	      ("L" . (lambda () (interactive)
-		       (elfeed-search-set-filter "@6-months-ago +unread +linux")))
-	      ("A" . (lambda () (interactive)
-		       (elfeed-search-set-filter "@6-months-ago +unread +arts")))
-	      ("C" . (lambda () (interactive)
-		       (elfeed-search-set-filter "@6-months-ago +unread +cycling")))
-	      )
-  )
+(with-eval-after-load 'elfeed
+  (elfeed-org))
+
+;;from https://plrj.org/2025/06/14/my-emacs-elfeed-configuration/
+(defun elfeed-show-fetch-full-text ()
+  "Fetch the full text of the current Elfeed entry using eww-readable."
+  (interactive)
+  (let* ((entry elfeed-show-entry)
+         (url (elfeed-entry-link entry)))
+    (eww url)  ;; Open the URL in eww
+    ;;    (run-at-time "0.5" nil
+    ;;               (lambda ()
+    ;;                 (with-current-buffer "*eww*"
+    ;;                   (eww-readable))))) ;; Call eww-readable after a short delay
+    ;;    It might not be good to use eww-readable for some pages, or just try 'R'
+    )
+  ) 
+
 
 ;; AI, AI...more to be debugged...
 (use-package eca)
@@ -312,8 +387,10 @@
   (doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; for treemacs users
   (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  ;; :config
+  :config
   ;; (load-theme 'doom-one t)
+  ;; doom-gruvbox
+  (load-theme 'doom-zenburn t)
 
   ;; ;; Enable flashing mode-line on errors
   ;; (doom-themes-visual-bell-config)
@@ -340,6 +417,12 @@
 
 (use-package leuven-theme
   :ensure t
+  )
+
+(use-package atom-one-dark-theme
+  :ensure t
+;;:config
+;; (load-theme 'atom-one-dark t)
   )
 
 ;;
