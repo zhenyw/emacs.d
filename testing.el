@@ -123,12 +123,13 @@
   :config
   (setq eglot-report-progress t)
   (add-hook 'rust-mode-hook 'eglot-ensure)
-  ;; not by default open for all C, can fallback to dump-jump...
+  ;; not by default open for all C, can fallback to cscope, dump-jump...
   ;;  (add-hook 'c-mode-hook 'eglot-ensure)
   (add-to-list 'eglot-stay-out-of 'eldoc)
   )
 
-;; Try dump jump...
+;; Try dump jump which only depends on grep to find symbols
+
 ;; (use-package dumb-jump
 ;;  :ensure t
 ;;  :config
@@ -145,9 +146,13 @@
 
 ;; use hacked version for emacs project support
 ;;(require dumb-jump) ;; why this doesn't work with load-path?
-(load-file "~/.emacs.d/sync/lisp/dumb-jump.el")
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-(setq dumb-jump-force-searcher 'rg)
+
+;; Below is previous config.
+;; Currently still use cscope for old kernel source, dumb-jump doesn't
+;; work fast with large code base even with rg like linux kernel...
+;;(load-file "~/.emacs.d/sync/lisp/dumb-jump.el")
+;;(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+;;(setq dumb-jump-force-searcher 'rg)
 
 ;;dirvish
 (use-package dirvish
@@ -160,7 +165,7 @@
   :config
   (global-treesit-auto-mode))
 
-;;symbols-outline
+;;symbols-outline (only with lsp now)
 (use-package symbols-outline
   :bind
   (("C-c i" . symbols-outline-show))
@@ -274,8 +279,62 @@
 
 ;; cscope
 (use-package xcscope
+  :ensure t
   :config
   (cscope-setup)
+  :bind
+;; * Default Keybindings:
+;;
+;; All keybindings use the "C-c s" prefix, but are usable only while
+;; editing a source file, or in the cscope results buffer:
+;;
+;;      C-c s s         Find symbol.
+;;      C-c s =         Find assignments to this symbol
+;;      C-c s d         Find global definition.
+;;      C-c s g         Find global definition (alternate binding).
+;;      C-c s G         Find global definition without prompting.
+;;      C-c s c         Find functions calling a function.
+;;      C-c s C         Find called functions (list functions called
+;;                      from a function).
+;;      C-c s t         Find text string.
+;;      C-c s e         Find egrep pattern.
+;;      C-c s f         Find a file.
+;;      C-c s i         Find files #including a file.
+;;
+;; These pertain to navigation through the search results:
+;;
+;;      C-c s b         Display *cscope* buffer.
+;;      C-c s B         Auto display *cscope* buffer toggle.
+;;      C-c s n         Next symbol.
+;;      C-c s N         Next file.
+;;      C-c s p         Previous symbol.
+;;      C-c s P         Previous file.
+;;      C-c s u         Pop mark.
+;;
+;; These pertain to setting and unsetting the variable,
+;; `cscope-initial-directory', (location searched for the cscope database
+;;  directory):
+;;
+;;      C-c s a         Set initial directory.
+;;      C-c s A         Unset initial directory.
+;;
+;; These pertain to cscope database maintenance:
+;;
+;;      C-c s L         Create list of files to index.
+;;      C-c s I         Create list and index.
+;;      C-c s E         Edit list of files to index.
+;;      C-c s W         Locate this buffer's cscope directory
+;;                      ("W" --> "where").
+;;      C-c s S         Locate this buffer's cscope directory.
+;;                      (alternate binding: "S" --> "show").
+;;      C-c s T         Locate this buffer's cscope directory.
+;;                      (alternate binding: "T" --> "tell").
+;;      C-c s D         Dired this buffer's directory.
+
+  (("C-c d" . cscope-find-global-definition-no-prompting)
+   ("C-c c" . cscope-find-functions-calling-this-function)
+   ("C-c u" . cscope-pop-mark)
+   )
   )
 
 ;;inhibit-mouse
@@ -321,6 +380,9 @@
   :bind
   (:map elfeed-search-mode-map
 	("Q" . elfeed-kill-buffer)
+	;; 't' for top which exclude all hacking posts
+	("t" . (lambda () (interactive)
+		 (elfeed-search-set-filter "@6-months-ago +unread -hacking")))
 	("N" . (lambda () (interactive)
 		 ;;(elfeed-search-set-filter "@6-months-ago +unread +news")))
 		 (elfeed-search-set-filter "@6-months-ago +news")))
@@ -334,6 +396,8 @@
 		 (elfeed-search-set-filter "@6-months-ago +cycling")))
 	("B" . (lambda () (interactive)
 		 (elfeed-search-set-filter "@6-months-ago +books")))
+	("H" . (lambda () (interactive)
+		 (elfeed-search-set-filter "@6-months-ago +hacking")))
 	)
   (:map elfeed-show-mode-map
 	("f" . elfeed-show-fetch-full-text)

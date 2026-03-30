@@ -8,25 +8,36 @@
 *** http://pragmaticemacs.com/feed/
 *** http://planet.emacslife.com/atom.xml
 *** https://bicycleforyourmind.com/feed.rss
+** hacking                                                          :hacking:
+*** https://news.ycombinator.com/rss
+*** https://lobste.rs/rss
 ** arts                                                                :arts:
 *** http://www.unitas.me/?feed=rss2
 *** http://www.biosmonthly.com/rss.xml
 *** http://localhost:8080/?action=display&context=Username&u=chefmaooo&bridge=InstagramBridge&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=milkmagazine_hk&media_type=all&format=Atom
 ** news                                                                :news:
 *** http://www.solidot.org/index.rss
 *** http://sspai.com/feed
 *** http://feeds.feedburner.com/nytcn
 *** https://rss.slashdot.org/Slashdot/slashdotMain
 *** https://feedx.net/rss/infzm.xml
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=initiumnews&media_type=all&format=Atom
 ** books                                                              :books:
 *** http://www.openbook.org.tw/rss.xml
 *** https://feedx.net/rss/shanghaishuping.xml
-*** http://localhost:8080/?action=display&context=Username&u=chenyunrhyme&bridge=InstagramBridge&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=chenyunrhyme&media_type=all&format=Atom
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=nowhere.rito.tokyo&media_type=all&direct_links=on&format=Atom
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=51personaeproject&media_type=all&format=Atom
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=hunter.bookstore&media_type=all&format=Atom
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=frontlinefellowship.io&media_type=all&format=Atom
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=insects_publishing&media_type=all&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=bleed.print&media_type=all&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=book.punch&media_type=all&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=seikoshabooks&media_type=all&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=hans.bookstorehk&media_type=all&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=lionsinkbooks&media_type=all&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=shunde_shuntak_&media_type=all&format=Atom
 ** cycling                                                          :cycling:
 *** https://suckmycog.com/feed/
 *** https://bluelug.com/blog/feed/
