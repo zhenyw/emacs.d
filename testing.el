@@ -250,9 +250,6 @@
 ;;window operation history track enable
 (winner-mode 1)
 
-;;session saving
-(desktop-save-mode 1)
-
 ;;store backup file in single place
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves")))
 
@@ -495,3 +492,27 @@
   :ensure t
   :bind (("C-c g" . magit-status))
   )
+
+;; recentf
+(use-package recentf
+  :bind
+  (("C-x C-r" . recentf-open-files)
+   )
+  :config
+  (progn
+    (setq recentf-max-saved-items 200
+          recentf-max-menu-items 15)
+    (recentf-mode 1)
+    ))
+
+;;session saving
+;;hmm, this is really making startup slow before UI...
+(setq desktop-dirname             "~/.emacs.d/"
+      desktop-base-file-name      "emacs.desktop"
+      desktop-base-lock-name      "emacs.desktop.lock"
+      desktop-path                (list desktop-dirname)
+      desktop-load-locked-desktop t     ;; load even if lock file exists
+      desktop-auto-save-timeout   30)   ;; autosave every 30 seconds
+(desktop-save-mode 1)
+
+

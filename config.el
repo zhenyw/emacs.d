@@ -83,15 +83,3 @@
 
 ;; org-mode
 (setq org-log-done 'time)
-
-;; recentf
-(use-package recentf
-  :bind
-  (("C-x C-r" . recentf-open-files)
-   )
-  :config
-  (progn
-    (setq recentf-max-saved-items 200
-          recentf-max-menu-items 15)
-    (recentf-mode)
-    ))
