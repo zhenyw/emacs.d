@@ -126,6 +126,11 @@
   ;; not by default open for all C, can fallback to cscope, dump-jump...
   ;;  (add-hook 'c-mode-hook 'eglot-ensure)
   (add-to-list 'eglot-stay-out-of 'eldoc)
+  (set-face-attribute 'eglot-inlay-hint-face nil
+                    :foreground "#55AA55" ;; some green
+                    :background "unspecified" ;; Remove any background box
+                    :height 0.8             ;; Make them 80% of normal font size
+                    :slant 'italic)         ;; Make them italicized
   )
 
 ;; Try dump jump which only depends on grep to find symbols
@@ -376,7 +381,7 @@
   (elfeed-show-truncate-long-urls t)
   :bind
   (:map elfeed-search-mode-map
-	("Q" . elfeed-kill-buffer)
+	("q" . elfeed-kill-buffer)
 	;; 't' for top which exclude all hacking posts
 	("t" . (lambda () (interactive)
 		 (elfeed-search-set-filter "@6-months-ago +unread -hacking")))
@@ -514,5 +519,35 @@
       desktop-load-locked-desktop t     ;; load even if lock file exists
       desktop-auto-save-timeout   30)   ;; autosave every 30 seconds
 (desktop-save-mode 1)
+;;(add-to-list 'desktop-buffers-not-to-save ".*notmuch.*")
+;;(add-to-list 'desktop-buffers-not-to-save ".*elfeed.*")
+;;(add-to-list 'desktop-buffers-not-to-save ".*magit.*")
+;;(add-to-list 'desktop-modes-not-to-save '(dired-mode))
+;;(add-to-list 'desktop-modes-not-to-save '(eww-mode))
 
+;;dired
+(setq dired-guess-shell-alist-user
+      '(("\\.pdf\\'" "mupdf-gl")
+        ("\\.png\\'" "feh")
+        ("\\.jpg\\'" "feh")
+        ("\\.mp4\\'" "mpv")
+        ("\\.mkv\\'" "mpv")))
 
+;;rime
+;;default install into ~/.emacs/rime/
+;;try to clone required schema e.g japanese under that directory
+;;(then do rime deployer, maybe emacs-rime would call deploy too after config changed
+;;M-x rime-open-configuration to change default config like
+;;patch:
+;;  schema_list:
+;;    - {schema: luna_pinyin}
+;;    - {schema: luna_pinyin_simp}
+;;    - {schema: japanese}
+;; toggle input method with C-\, then C-` to switch mode
+(use-package rime
+  :custom
+  (default-input-method "rime")
+  :bind
+  (:map rime-mode-map
+        ("C-`" . 'rime-send-keybinding))
+  )
