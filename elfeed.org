@@ -7,7 +7,6 @@
 *** http://planet.emacsen.org/atom.xml
 *** http://pragmaticemacs.com/feed/
 *** http://planet.emacslife.com/atom.xml
-*** https://bicycleforyourmind.com/feed.rss
 ** hacking                                                          :hacking:
 *** https://news.ycombinator.com/rss
 *** https://lobste.rs/rss
@@ -38,6 +37,7 @@
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=hans.bookstorehk&media_type=all&format=Atom
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=lionsinkbooks&media_type=all&format=Atom
 *** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=shunde_shuntak_&media_type=all&format=Atom
+*** http://localhost:8080/?action=display&bridge=InstagramBridge&context=Username&u=momo_books321&media_type=all&format=Atom
 ** cycling                                                          :cycling:
 *** https://suckmycog.com/feed/
 *** https://bluelug.com/blog/feed/
