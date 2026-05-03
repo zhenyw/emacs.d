@@ -16,6 +16,8 @@
 (set-frame-font "Hack-14" nil t)
 ;;no bell sound
 (setq visible-bell t)
+;; always show project info
+(setq project-mode-line t)
 
 ;; define function to shutdown emacs server instance
 (defun server-shutdown ()
