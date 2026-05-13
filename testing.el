@@ -364,6 +364,7 @@
   (setq shr-bullet "• ")
   (setq shr-folding-mode t)
   (setq eww-search-prefix "https://duckduckgo.com/html?q=")
+  (setq shr-use-fonts nil)
   )
 
 
@@ -517,13 +518,20 @@
       desktop-base-lock-name      "emacs.desktop.lock"
       desktop-path                (list desktop-dirname)
       desktop-load-locked-desktop t     ;; load even if lock file exists
-      desktop-auto-save-timeout   30)   ;; autosave every 30 seconds
+      desktop-auto-save-timeout   60   ;; autosave every 30 seconds
+      desktop-save-buffer         200)  ;;buffer limitation
+(setq desktop-modes-not-to-save
+      '(tags-table-mode
+        cscope-list-entry-mode
+        xref--xref-buffer-mode
+	eww
+	elfeed-search-mode
+	elfeed-show-mode
+	dired-mode
+	notmuch-hello-mode
+	notmuch-tree-mode
+	notmuch-show-mode))
 (desktop-save-mode 1)
-;;(add-to-list 'desktop-buffers-not-to-save ".*notmuch.*")
-;;(add-to-list 'desktop-buffers-not-to-save ".*elfeed.*")
-;;(add-to-list 'desktop-buffers-not-to-save ".*magit.*")
-;;(add-to-list 'desktop-modes-not-to-save '(dired-mode))
-;;(add-to-list 'desktop-modes-not-to-save '(eww-mode))
 
 ;;dired
 (setq dired-guess-shell-alist-user
